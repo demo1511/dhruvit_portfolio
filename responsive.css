@@ -83,7 +83,7 @@
   /* SKILLS SECTION */
   .skills-section {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: auto auto;
 
   }
 
