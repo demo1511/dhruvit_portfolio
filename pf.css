@@ -12,6 +12,7 @@ body {
   font-family: Arial, sans-serif;
   background: #ffffff;
 }
+
 .no-link {
   text-decoration: none;
   color: inherit;
@@ -362,6 +363,21 @@ a {
     transform: rotate(360deg);
   }
 }
+
+#typing-text {
+  border-right: 2px solid #fff;
+  padding-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
 
 .main img {
   z-index: 999;
