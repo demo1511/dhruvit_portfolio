@@ -59,47 +59,48 @@ function animate() {
 
     requestAnimationFrame(animate);
 }
-
 animate();
 
+// Splash screen fade
 window.addEventListener("load", () => {
     const splash = document.getElementById("splash");
-
     setTimeout(() => {
         splash.classList.add("hide-splash");
-    }, 3000); // 3 seconds
+    }, 3000);
 });
 
-const roles = ["Flutter Developer", "Full Stack Developer"];
-let currentRole = 0;
-let index = 0;
-let isDeleting = false;
+// Typing effect
+window.addEventListener("load", () => {
+    const roles = ["Flutter Developer", "Full Stack Developer"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-function typeEffect() {
-    const textElement = document.getElementById("typing-text");
-    const currentText = roles[currentRole];
+    function typeEffect() {
+        const textElement = document.getElementById("typing-text");
+        const currentRole = roles[roleIndex];
 
-    if (isDeleting) {
-        textElement.textContent = currentText.substring(0, index--);
-    } else {
-        textElement.textContent = currentText.substring(0, index++);
+        if (!textElement) return;
+
+        if (isDeleting) {
+            textElement.textContent = currentRole.substring(0, charIndex--);
+        } else {
+            textElement.textContent = currentRole.substring(0, charIndex++);
+        }
+
+        if (!isDeleting && charIndex === currentRole.length) {
+            setTimeout(() => (isDeleting = true), 1000);
+        }
+
+        if (isDeleting && charIndex < 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+        }
+
+        const speed = isDeleting ? 70 : 120;
+
+        setTimeout(typeEffect, speed);
     }
 
-    // Switch to deleting mode
-    if (!isDeleting && index === currentText.length) {
-        setTimeout(() => (isDeleting = true), 1000);
-    }
-
-    // Switch to typing next role
-    if (isDeleting && index < 0) {
-        isDeleting = false;
-        currentRole = (currentRole + 1) % roles.length; // next text
-    }
-
-    // Speed control
-    const speed = isDeleting ? 70 : 120;
-
-    setTimeout(typeEffect, speed);
-}
-
-typeEffect();
+    typeEffect();
+});
